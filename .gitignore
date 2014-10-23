@@ -11,3 +11,4 @@
 /lib/mail/parsers/ragel/ruby/machines/*.svg
 /mail-*.gem
 /rdoc
+/spec/fixtures/emails/failed_emails/
