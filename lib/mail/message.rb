@@ -2134,20 +2134,7 @@ module Mail
     end
 
     def decode_body_as_text
-      body_text = decode_body
-      if charset
-        if RUBY_VERSION < '1.9'
-          require 'iconv'
-          return Iconv.conv("UTF-8//TRANSLIT//IGNORE", charset, body_text)
-        else
-          if encoding = Encoding.find(charset) rescue nil
-            body_text.force_encoding(encoding)
-            return body_text.encode(Encoding::UTF_8, :undef => :replace, :invalid => :replace, :replace => '')
-          end
-        end
-      end
-      body_text
+      Encodings.transcode_charset decode_body, charset, 'UTF-8'
     end
-
   end
 end

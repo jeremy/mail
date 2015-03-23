@@ -343,6 +343,14 @@ describe Mail::Message do
       mail.to.should eq ["raasdnil@gmail.com"]
       mail.decoded.should eq "すみません。\n\n"
     end
+
+    it "should parse sources with charsets that we know but Ruby doesn't" do
+      raw_message = File.read(fixture('emails', 'multi_charset', 'ks_c_5601-1987.eml'))
+      original_encoding = raw_message.encoding if raw_message.respond_to?(:encoding)
+      mail = Mail.new(raw_message)
+      expect(mail.decoded).to eq "스티해\n"
+      expect(raw_message.encoding).to eq original_encoding if raw_message.respond_to?(:encoding)
+    end
   end
 
   describe "directly setting values of a message" do

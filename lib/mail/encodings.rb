@@ -50,6 +50,14 @@ module Mail
       enc = enc.to_s.gsub("-", "_").downcase
     end
 
+    def Encodings.transcode_charset(str, from_charset, to_charset = 'UTF-8')
+      if from_charset
+        RubyVer.transcode_charset str, from_charset, to_charset
+      else
+        str
+      end
+    end
+
     # Encodes a parameter value using URI Escaping, note the language field 'en' can
     # be set using Mail::Configuration, like so:
     #

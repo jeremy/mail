@@ -43,6 +43,10 @@ module Mail
       klass.const_get( string )
     end
 
+    def Ruby19.transcode_charset(str, from_encoding, to_encoding = Encoding::UTF_8)
+      str.dup.force_encoding(pick_encoding(from_encoding)).encode(to_encoding, :undef => :replace, :invalid => :replace, :replace => '')
+    end
+
     def Ruby19.b_value_encode(str, encoding = nil)
       encoding = str.encoding.to_s
       [Ruby19.encode_base64(str), encoding]
