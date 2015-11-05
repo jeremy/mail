@@ -300,7 +300,6 @@ module Mail
 
         if encoding == previous_encoding
           line = results.pop + line
-          line.gsub!(/\?\=\=\?.+?\?[QqBb]\?/m, '')
         end
 
         previous_encoding = encoding
